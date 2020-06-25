@@ -8,9 +8,13 @@ export default class VideoDetail extends Component {
   }
 
   render() {
+    const {route} = this.props;
+    const {itemId} = route.params;
+    const {title} = route.params;
     return (
       <View>
-        <Text> VideoDetail </Text>
+        <Text> {itemId} </Text>
+        <Text> {title} </Text>
       </View>
     );
   }

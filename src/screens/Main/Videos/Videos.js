@@ -20,6 +20,8 @@ export default class Videos extends Component {
   }
 
   render() {
+    const {navigation} = this.props;
+
     const {height, width} = Dimensions.get('window');
 
     const stWidth = 540; //Standard Width
@@ -63,6 +65,12 @@ export default class Videos extends Component {
                 margin: 10,
               }}>
               <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('VideoDetail', {
+                    itemId: item.id,
+                    title: item.title,
+                  });
+                }}
                 style={{
                   flexDirection: 'row',
                   width: (480 / stWidth) * width,

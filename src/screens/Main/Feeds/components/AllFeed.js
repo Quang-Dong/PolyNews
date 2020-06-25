@@ -10,7 +10,7 @@ import {
 
 import {Neomorph, Shadow} from 'react-native-neomorph-shadows';
 
-import pic from '../../../../assets/images/pic1.png';
+import pic from '../../../../assets/images/pic2.png';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 export default class AllFeed extends Component {
@@ -20,6 +20,8 @@ export default class AllFeed extends Component {
   }
 
   render() {
+    const {navigation} = this.props;
+
     const {height, width} = Dimensions.get('window');
 
     const stWidth = 540; //Standard Width
@@ -74,7 +76,14 @@ export default class AllFeed extends Component {
               <FlatList
                 data={DATA}
                 renderItem={({item}) => (
-                  <TouchableOpacity style={{marginBottom: 30}}>
+                  <TouchableOpacity
+                    style={{marginBottom: 30}}
+                    onPress={() => {
+                      navigation.navigate('FeedDetail', {
+                        itemId: item.id,
+                        title: item.title,
+                      });
+                    }}>
                     <Image
                       source={pic}
                       style={{

@@ -2,8 +2,8 @@ import 'react-native-gesture-handler';
 import React, {Component} from 'react';
 import {View, StatusBar, Dimensions, StyleSheet} from 'react-native';
 
-import FeedsScreen from './screens/Main/Feeds/Feeds';
-import VideosScreen from './screens/Main/Videos/Videos';
+import FeedDetailScreen from './screens/Main/Feeds/FeedDetail';
+import VideoDetailScreen from './screens/Main/Videos/VideoDetail';
 import LikesScreen from './screens/Main/Likes/Likes';
 import MainScreen from './screens/Main/Main';
 
@@ -54,6 +54,36 @@ export default class App extends Component {
               component={MainScreen}
               options={({route}) => ({
                 headerTitle: this._getHeaderTitle(route),
+                headerTintColor: '#595F6C',
+                headerStyle: {
+                  backgroundColor: '#EBECF0',
+                  elevation: 0,
+                },
+                headerTitleStyle: {
+                  fontSize: (25 / stHeight) * height,
+                },
+              })}
+            />
+            <Stack.Screen
+              name="FeedDetail"
+              component={FeedDetailScreen}
+              options={({route}) => ({
+                headerTitle: '',
+                headerTintColor: '#595F6C',
+                headerStyle: {
+                  backgroundColor: '#EBECF0',
+                  elevation: 0,
+                },
+                headerTitleStyle: {
+                  fontSize: (25 / stHeight) * height,
+                },
+              })}
+            />
+            <Stack.Screen
+              name="VideoDetail"
+              component={VideoDetailScreen}
+              options={({route}) => ({
+                headerTitle: 'Video Detail',
                 headerTintColor: '#595F6C',
                 headerStyle: {
                   backgroundColor: '#EBECF0',
