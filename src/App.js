@@ -83,7 +83,7 @@ export default class App extends Component {
               name="VideoDetail"
               component={VideoDetailScreen}
               options={({route}) => ({
-                headerTitle: 'Video Detail',
+                headerTitle: '',
                 headerTintColor: '#595F6C',
                 headerStyle: {
                   backgroundColor: '#EBECF0',
