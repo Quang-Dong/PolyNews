@@ -31,7 +31,6 @@ export default class Life extends Component {
     itemsRef.on('value', snap => {
       var items = [];
       snap.forEach(child => {
-        console.log('child ICT: ' + child.val().title);
         let item = {
           id: child.key,
           title: child.val().title,

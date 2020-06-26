@@ -25,8 +25,7 @@ export default class VideoDetail extends Component {
     const stHeight = 936; // Standard Height
 
     const {route} = this.props;
-    const {itemId} = route.params;
-    const {title} = route.params;
+    const {id, videoID} = route.params;
     return (
       <View
         style={{
@@ -38,7 +37,7 @@ export default class VideoDetail extends Component {
         <StatusBar barStyle="light-content" backgroundColor="black" />
         <YouTube
           apiKey="AIzaSyBatYNufQAkxJ2gToAHh1qGFgEvqeaq8vQ"
-          videoId="OuWfdRZxhVM"
+          videoId={videoID}
           play
           // fullscreen
           loop

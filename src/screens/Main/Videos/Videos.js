@@ -10,13 +10,44 @@ import {
 
 import {Neomorph, Shadow} from 'react-native-neomorph-shadows';
 
-import pic from '../../../assets/images/pic1.png';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+
+import firebase from 'firebase';
 
 export default class Videos extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      videos: [],
+    };
+
+    this.itemRef = firebase.database().ref('videos');
+  }
+
+  listenForItems = itemRef => {
+    itemRef.on('value', snap => {
+      let items = [];
+      snap.forEach(child => {
+        let item = {
+          id: child.key,
+          videoID: child.val().videoID,
+          title: child.val().title,
+          image: child.val().image,
+          time: child.val().time,
+        };
+        items.push(item);
+      });
+      this.setState({
+        videos: items,
+      });
+      this.state.videos.map((item, idx) => {
+        console.log(item.id);
+      });
+    });
+  };
+
+  componentDidMount() {
+    this.listenForItems(this.itemRef);
   }
 
   render() {
@@ -27,20 +58,6 @@ export default class Videos extends Component {
     const stWidth = 540; //Standard Width
     const stHeight = 936; // Standard Height
 
-    const DATA = [
-      {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item',
-      },
-      {
-        id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-        title: 'Second Item',
-      },
-      {
-        id: '58694a0f-3da1-471f-bd96-145571e29d72',
-        title: 'Third Item',
-      },
-    ];
     return (
       <SafeAreaView
         style={{
@@ -50,7 +67,7 @@ export default class Videos extends Component {
           justifyContent: 'center',
         }}>
         <FlatList
-          data={DATA}
+          data={this.state.videos}
           renderItem={({item}) => (
             <Neomorph
               swapShadows // <- change zIndex of each shadow color
@@ -67,8 +84,8 @@ export default class Videos extends Component {
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate('VideoDetail', {
-                    itemId: item.id,
-                    title: item.title,
+                    id: item.id,
+                    videoID: item.videoID,
                   });
                 }}
                 style={{
@@ -81,7 +98,7 @@ export default class Videos extends Component {
                   alignItems: 'center',
                 }}>
                 <Image
-                  source={pic}
+                  source={{uri: item.image}}
                   style={{
                     height: (130 / stHeight) * height,
                     width: (130 / stWidth) * width,
@@ -104,8 +121,7 @@ export default class Videos extends Component {
                         color: '#5F6571',
                         fontSize: 17,
                       }}>
-                      Lộ diện hình ảnh các ăng ten dành cho mạng internet vệ
-                      tinh Starlink
+                      {item.title}
                     </Text>
                   </View>
                   <View
@@ -114,7 +130,7 @@ export default class Videos extends Component {
                       justifyContent: 'flex-end',
                     }}>
                     <Text style={{color: '#CBCDD4', fontWeight: 'bold'}}>
-                      10 May 6:00 AM
+                      {item.time}
                     </Text>
                   </View>
                 </View>

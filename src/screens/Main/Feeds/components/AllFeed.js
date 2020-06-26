@@ -28,9 +28,7 @@ export default class AllFeed extends Component {
     itemsRef.on('value', snap => {
       var items = [];
       snap.forEach(child1 => {
-        console.log('child1: ' + child1.key);
         child1.forEach(child => {
-          console.log('child2: ' + child.val().title);
           let item = {
             id: child.key,
             title: child.val().title,

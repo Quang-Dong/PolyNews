@@ -408,5 +408,67 @@
                 "title": "'10 ngày kinh hoàng' với bác sĩ và bệnh nhân phi công"
             }
         }
+    },
+    "videos": {
+        "1A": {
+            "title": "Chìa khóa mở cửa ngành Bất động sản nghỉ dưỡng",
+            "image": "https://firebasestorage.googleapis.com/v0/b/poly-2111b.appspot.com/o/Videos%2FV_1.png?alt=media&token=2d60106d-7868-49de-9c0e-9beb38fdbad7",
+            "videoID": "NXtNrLTcmxA",
+            "time": "23/06/2020"
+        },
+        "2A": {
+            "title": "",
+            "image": "",
+            "videoID": "",
+            "time": ""
+        },
+        "3A": {
+            "title": "",
+            "image": "",
+            "videoID": "",
+            "time": ""
+        },
+        "4A": {
+            "title": "",
+            "image": "",
+            "videoID": "",
+            "time": ""
+        },
+        "5A": {
+            "title": "",
+            "image": "",
+            "videoID": "",
+            "time": ""
+        },
+        "6A": {
+            "title": "",
+            "image": "",
+            "videoID": "",
+            "time": ""
+        },
+        "7A": {
+            "title": "",
+            "image": "",
+            "videoID": "",
+            "time": ""
+        },
+        "8A": {
+            "title": "",
+            "image": "",
+            "videoID": "",
+            "time": ""
+        },
+        "9A": {
+            "title": "",
+            "image": "",
+            "videoID": "",
+            "time": ""
+        },
+        "10A": {
+            "title": "",
+            "image": "",
+            "videoID": "",
+            "time": ""
+        }
     }
 }
