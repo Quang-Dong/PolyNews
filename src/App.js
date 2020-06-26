@@ -86,7 +86,7 @@ export default class App extends Component {
                 headerTitle: '',
                 headerTintColor: '#595F6C',
                 headerStyle: {
-                  backgroundColor: '#EBECF0',
+                  backgroundColor: 'black',
                   elevation: 0,
                 },
                 headerTitleStyle: {

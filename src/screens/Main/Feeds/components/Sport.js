@@ -10,35 +10,70 @@ import {
 
 import {Neomorph, Shadow} from 'react-native-neomorph-shadows';
 
-import pic from '../../../../assets/images/pic1.png';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+
+import firebaseConfig from 'firebase';
 
 export default class Sport extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      feeds: [],
+    };
+
+    this.itemsRef = firebaseConfig
+      .database()
+      .ref('allFeeds')
+      .child('Sport');
+  }
+
+  listenForItems = itemsRef => {
+    itemsRef.on('value', snap => {
+      var items = [];
+      snap.forEach(child => {
+        console.log('child ICT: ' + child.val().title);
+        let item = {
+          id: child.key,
+          title: child.val().title,
+          time: child.val().time,
+          opening: child.val().opening,
+          opening2: child.val().opening2,
+          image: child.val().image,
+          content: child.val().content,
+          state: child.val().state,
+          link: child.val().link,
+        };
+        items.push(item);
+      });
+
+      this.setState({
+        feeds: items,
+      });
+
+      this.state.feeds.map((item, idx) => {
+        console.log(item.id);
+      });
+    });
+  };
+
+  setDB() {
+    this.itemsRef.set({
+      3: 'Sport',
+    });
+  }
+
+  componentDidMount() {
+    this.listenForItems(this.itemsRef);
   }
 
   render() {
+    const {navigation} = this.props;
+
     const {height, width} = Dimensions.get('window');
 
     const stWidth = 540; //Standard Width
     const stHeight = 936; // Standard Height
 
-    const DATA = [
-      {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item',
-      },
-      {
-        id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-        title: 'Second Item',
-      },
-      {
-        id: '58694a0f-3da1-471f-bd96-145571e29d72',
-        title: 'Third Item',
-      },
-    ];
     return (
       <View
         style={{
@@ -72,11 +107,24 @@ export default class Sport extends Component {
             }}>
             <SafeAreaView style={{backgroundColor: '#EBECF0', margin: 10}}>
               <FlatList
-                data={DATA}
+                data={this.state.feeds}
                 renderItem={({item}) => (
-                  <TouchableOpacity style={{marginBottom: 30}}>
+                  <TouchableOpacity
+                    style={{marginBottom: 30}}
+                    onPress={() => {
+                      navigation.navigate('FeedDetail', {
+                        id: item.id,
+                        title: item.title,
+                        time: item.time,
+                        opening: item.opening,
+                        opening2: item.opening2,
+                        image: item.image,
+                        content: item.content,
+                        state: item.state,
+                      });
+                    }}>
                     <Image
-                      source={pic}
+                      source={{uri: item.image}}
                       style={{
                         height: (200 / stHeight) * height,
                         width: width - (59 / stWidth) * width,
@@ -91,8 +139,7 @@ export default class Sport extends Component {
                           color: '#5F6571',
                           fontSize: 14,
                         }}>
-                        Lộ diện hình ảnh các ăng ten dành cho mạng internet vệ
-                        tinh Starlink
+                        {item.title}
                       </Text>
                     </View>
                   </TouchableOpacity>

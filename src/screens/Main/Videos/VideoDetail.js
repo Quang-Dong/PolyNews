@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, Text, StyleSheet, Dimensions, StatusBar} from 'react-native';
 
 import YouTube from 'react-native-youtube';
 
@@ -16,6 +16,8 @@ export default class VideoDetail extends Component {
     };
   }
 
+  //TODO: Sửa giao diện nút 'quay lại'.
+
   render() {
     const {height, width} = Dimensions.get('window');
 
@@ -28,11 +30,12 @@ export default class VideoDetail extends Component {
     return (
       <View
         style={{
-          backgroundColor: '#EBECF0',
+          backgroundColor: 'black',
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
         }}>
+        <StatusBar barStyle="light-content" backgroundColor="black" />
         <YouTube
           apiKey="AIzaSyBatYNufQAkxJ2gToAHh1qGFgEvqeaq8vQ"
           videoId="OuWfdRZxhVM"
@@ -57,11 +60,9 @@ export default class VideoDetail extends Component {
           }
           style={{
             alignSelf: 'stretch',
-            width: (450 / stWidth) * width,
+            width: width,
             height: (300 / stHeight) * height,
             backgroundColor: '#EBECF0',
-            alignSelf: 'center',
-            borderRadius: 10,
           }}
         />
       </View>
