@@ -6,11 +6,28 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import {Neomorph, Shadow} from 'react-native-neomorph-shadows';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 
+import firebase from 'firebase';
+
 export default class FeedDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.itemsRef = firebase.database().ref('likes');
   }
+
+  setDB = (id, title, image, time, opening, opening2, content, state) => {
+    this.itemsRef.push({
+      id: id,
+      title: title,
+      image: image,
+      time: time,
+      opening: opening,
+      opening2: opening2,
+      content: content,
+      state: state,
+    });
+  };
 
   render() {
     const {height, width} = Dimensions.get('window');
@@ -84,8 +101,21 @@ export default class FeedDetail extends Component {
                   <Icon name="clockcircleo" size={16} color="gray" />
                   <Text style={{color: 'gray', marginLeft: 5}}>{time}</Text>
                 </View>
-                <TouchableOpacity style={{alignSelf: 'flex-end'}}>
-                  <Icon name="heart" size={16} color="red" />
+                <TouchableOpacity
+                  style={{alignSelf: 'flex-end'}}
+                  onPress={() =>
+                    this.setDB(
+                      id,
+                      title,
+                      image,
+                      time,
+                      opening,
+                      opening2,
+                      content,
+                      state,
+                    )
+                  }>
+                  <Icon name="heart" size={16} color="#FDBA7C" />
                 </TouchableOpacity>
               </View>
 

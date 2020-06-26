@@ -54,12 +54,6 @@ export default class AllFeed extends Component {
     });
   };
 
-  // setDB() {
-  //   this.itemsRef.set({
-  //     3: 'Sport',
-  //   });
-  // }
-
   componentDidMount() {
     this.listenForItems(this.itemsRef);
   }
