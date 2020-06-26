@@ -6,19 +6,22 @@ import {
   Image,
   FlatList,
   SafeAreaView,
+  TouchableOpacity,
+  Alert,
 } from 'react-native';
 
 import firebase from 'firebase';
 
-import {Neomorph, Shadow} from 'react-native-neomorph-shadows';
+import {Neomorph} from 'react-native-neomorph-shadows';
 
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import Swipeout from 'react-native-swipeout';
 
 export default class Likes extends Component {
   constructor(props) {
     super(props);
     this.state = {
       likes: [],
+      activeRowKey: null,
     };
 
     this.itemRef = firebase.database().ref('likes');
@@ -39,14 +42,19 @@ export default class Likes extends Component {
           state: child.val().state,
         };
         items.push(item);
+        console.log('Key: ' + child.key);
       });
       this.setState({
         likes: items,
       });
       this.state.likes.map((item, idx) => {
-        console.log(item.id);
+        console.log('key: ' + item.id);
       });
     });
+  };
+
+  _delItem = key => {
+    this.itemRef.child(key).remove();
   };
 
   componentDidMount() {
@@ -60,6 +68,30 @@ export default class Likes extends Component {
 
     const stWidth = 540; //Standard Width
     const stHeight = 936; // Standard Height
+
+    const swipeOutLeft = {
+      autoClose: true,
+      right: {
+        text: 'Xóa',
+        type: 'delete',
+        onPress: () => {
+          Alert.alert(
+            'Chú ý',
+            'Bạn có chắc không?',
+            [
+              {
+                text: 'Có',
+                onPress: () => {
+                  this._delItem(this.props.item.id);
+                },
+              },
+              {text: 'Không', onPress: () => {}, style: 'cancel'},
+            ],
+            {cancelable: true},
+          );
+        },
+      },
+    };
 
     return (
       <SafeAreaView
@@ -75,7 +107,7 @@ export default class Likes extends Component {
             <Neomorph
               swapShadows // <- change zIndex of each shadow color
               style={{
-                shadowRadius: (5 / stHeight) * height,
+                shadowRadius: (4 / stHeight) * height,
                 borderRadius: (15 / stHeight) * height,
                 backgroundColor: '#EBECF0',
                 width: (500 / stWidth) * width,
@@ -84,52 +116,81 @@ export default class Likes extends Component {
                 alignItems: 'center',
                 margin: 10,
               }}>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('FeedDetail', {
-                    id: item.id,
-                    title: item.title,
-                    time: item.time,
-                    opening: item.opening,
-                    opening2: item.opening2,
-                    image: item.image,
-                    content: item.content,
-                    state: item.state,
-                  });
-                }}
-                style={{
-                  flexDirection: 'row',
-                  width: (480 / stWidth) * width,
-                  height: (130 / stHeight) * height,
-                  borderRadius: (15 / stHeight) * height,
-                  backgroundColor: '#EBECF0',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}>
-                <Image
-                  source={{uri: item.image}}
-                  style={{
-                    height: (130 / stHeight) * height,
-                    width: (130 / stWidth) * width,
-                    borderRadius: (15 / stHeight) * height,
+              {/* Để ý cái đống ngoặc ở 'right' là {[{}]} chứ không phải {{}} */}
+              <Swipeout
+                right={[
+                  {
+                    text: 'Xóa',
+                    type: 'delete',
+                    onPress: () => {
+                      Alert.alert(
+                        'Chú ý',
+                        'Bạn có chắc không?',
+                        [
+                          {
+                            text: 'Có',
+                            onPress: () => {
+                              this._delItem(item.id);
+                            },
+                          },
+                          {text: 'Không', onPress: () => {}, style: 'cancel'},
+                        ],
+                        {cancelable: true},
+                      );
+                    },
+                  },
+                ]}
+                style={{borderRadius: 15}}>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate(
+                      'FeedDetail',
+                      {
+                        id: item.id,
+                        title: item.title,
+                        time: item.time,
+                        opening: item.opening,
+                        opening2: item.opening2,
+                        image: item.image,
+                        content: item.content,
+                        state: item.state,
+                      },
+                      console.log('key2: ' + item.id),
+                    );
                   }}
-                />
-
-                <View
                   style={{
+                    flexDirection: 'row',
+                    width: (480 / stWidth) * width,
                     height: (130 / stHeight) * height,
-                    width: (330 / stWidth) * width,
+                    borderRadius: (15 / stHeight) * height,
+                    backgroundColor: '#EBECF0',
+                    justifyContent: 'space-between',
                   }}>
-                  <Text
+                  <Image
+                    source={{uri: item.image}}
                     style={{
-                      fontWeight: 'bold',
-                      color: '#5F6571',
-                      fontSize: 17,
+                      height: (130 / stHeight) * height,
+                      width: (130 / stWidth) * width,
+                      borderRadius: (15 / stHeight) * height,
+                    }}
+                  />
+
+                  <View
+                    style={{
+                      height: (130 / stHeight) * height,
+                      width: (330 / stWidth) * width,
                     }}>
-                    {item.title}
-                  </Text>
-                </View>
-              </TouchableOpacity>
+                    <Text
+                      style={{
+                        fontWeight: 'bold',
+                        color: '#5F6571',
+                        fontSize: 17,
+                      }}>
+                      {item.title}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </Swipeout>
             </Neomorph>
           )}
           key={item => item.id}
