@@ -27,11 +27,11 @@ export default class App extends Component {
 
     switch (routeName) {
       case 'Feeds':
-        return 'Today';
+        return 'Hôm nay';
       case 'Videos':
         return 'Video';
       case 'Likes':
-        return 'Likes';
+        return 'Yêu thích';
     }
   };
 

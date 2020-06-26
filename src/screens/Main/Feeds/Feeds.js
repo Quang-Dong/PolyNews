@@ -31,7 +31,7 @@ export default class Feeds extends Component {
             },
             labelStyle: {
               fontWeight: 'bold',
-              width: 65,
+              width: 75,
             },
             activeTintColor: '#FDBA7C',
             inactiveTintColor: '#BEC1C9',
@@ -39,11 +39,31 @@ export default class Feeds extends Component {
               backgroundColor: '#EBECF0',
             },
           }}>
-          <Tab.Screen name="All Feeds" component={AllFeedScreen} options={{}} />
-          <Tab.Screen name="ICT" component={ICTScreen} />
-          <Tab.Screen name="Life" component={LifeScreen} />
-          <Tab.Screen name="Sport" component={SportScreen} />
-          <Tab.Screen name="Health" component={HealthScreen} />
+          <Tab.Screen
+            name="All Feeds"
+            component={AllFeedScreen}
+            options={{title: 'Tổng hợp'}}
+          />
+          <Tab.Screen
+            name="ICT"
+            component={ICTScreen}
+            options={{title: 'Công nghệ'}}
+          />
+          <Tab.Screen
+            name="Life"
+            component={LifeScreen}
+            options={{title: 'Đời sống'}}
+          />
+          <Tab.Screen
+            name="Sport"
+            component={SportScreen}
+            options={{title: 'Thể thao'}}
+          />
+          <Tab.Screen
+            name="Health"
+            component={HealthScreen}
+            options={{title: 'Sức khỏe'}}
+          />
         </Tab.Navigator>
       </View>
     );
