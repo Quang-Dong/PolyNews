@@ -101,22 +101,34 @@ export default class FeedDetail extends Component {
                   <Icon name="clockcircleo" size={16} color="gray" />
                   <Text style={{color: 'gray', marginLeft: 5}}>{time}</Text>
                 </View>
-                <TouchableOpacity
-                  style={{alignSelf: 'flex-end'}}
-                  onPress={() =>
-                    this.setDB(
-                      id,
-                      title,
-                      image,
-                      time,
-                      opening,
-                      opening2,
-                      content,
-                      state,
-                    )
-                  }>
-                  <Icon name="heart" size={16} color="#FDBA7C" />
-                </TouchableOpacity>
+                <Neomorph
+                  swapShadows // <- change zIndex of each shadow color
+                  style={{
+                    shadowRadius: 3,
+                    borderRadius: 15,
+                    backgroundColor: '#EBECF0',
+                    width: 30,
+                    height: 30,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginRight: 10,
+                  }}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.setDB(
+                        id,
+                        title,
+                        image,
+                        time,
+                        opening,
+                        opening2,
+                        content,
+                        state,
+                      )
+                    }>
+                    <Icon name="heart" size={16} color="#FDBA7C" />
+                  </TouchableOpacity>
+                </Neomorph>
               </View>
 
               <View style={{width: (470 / stWidth) * width}}>
