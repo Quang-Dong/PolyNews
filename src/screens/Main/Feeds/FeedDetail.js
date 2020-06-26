@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
-import {View, Text, Dimensions, Image} from 'react-native';
+import {View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 
 import Icon from 'react-native-vector-icons/AntDesign';
 
-import {Neomorph, Shadow} from 'react-native-neomorph-shadows';
-import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import {Neomorph} from 'react-native-neomorph-shadows';
+
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 import firebase from 'firebase';
 
@@ -30,11 +34,6 @@ export default class FeedDetail extends Component {
   };
 
   render() {
-    const {height, width} = Dimensions.get('window');
-
-    const stWidth = 540; //Standard Width
-    const stHeight = 936; // Standard Height
-
     const {route} = this.props;
     const {
       id,
@@ -57,35 +56,38 @@ export default class FeedDetail extends Component {
         <Neomorph
           swapShadows // <- change zIndex of each shadow color
           style={{
-            shadowRadius: (6 / stHeight) * height,
-            borderRadius: (15 / stHeight) * height,
+            shadowRadius: hp('1%'),
+            borderRadius: hp('1%'),
             backgroundColor: '#EBECF0',
-            width: width - 20,
-            height: height - 50,
+            width: wp('90%'),
+            height: hp('87%'),
             justifyContent: 'flex-start',
             alignItems: 'center',
-            marginTop: 15,
+            marginTop: wp('4%'),
           }}>
           <Neomorph
             inner
             swapShadows // <- change zIndex of each shadow color
             style={{
-              shadowRadius: (6 / stHeight) * height,
-              borderRadius: (15 / stHeight) * height,
+              shadowRadius: hp('1%'),
+              borderRadius: hp('1%'),
               backgroundColor: '#EBECF0',
-              width: width - 20,
-              height: height - 50,
+              width: wp('90%'),
+              height: hp('87%'),
               justifyContent: 'flex-start',
               alignItems: 'center',
             }}>
             <ScrollView>
               <View
-                style={{width: (470 / stWidth) * width, marginVertical: 10}}>
+                style={{
+                  width: wp('84%'),
+                  marginVertical: hp('1%'),
+                }}>
                 <Text
                   style={{
                     fontWeight: 'bold',
                     color: '#5F6571',
-                    fontSize: 24,
+                    fontSize: hp('3.3%'),
                   }}>
                   {title}
                 </Text>
@@ -94,24 +96,26 @@ export default class FeedDetail extends Component {
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
-                  width: (470 / stWidth) * width,
-                  marginBottom: 10,
+                  width: wp('84%'),
+                  marginBottom: hp('1%'),
                 }}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Icon name="clockcircleo" size={16} color="gray" />
-                  <Text style={{color: 'gray', marginLeft: 5}}>{time}</Text>
+                  <Icon name="clockcircleo" size={hp('2.3%')} color="gray" />
+                  <Text style={{color: 'gray', marginLeft: hp('0.5%')}}>
+                    {time}
+                  </Text>
                 </View>
                 <Neomorph
                   swapShadows // <- change zIndex of each shadow color
                   style={{
-                    shadowRadius: 3,
-                    borderRadius: 15,
+                    shadowRadius: wp('1%'),
+                    borderRadius: hp('10%'),
                     backgroundColor: '#EBECF0',
-                    width: 30,
-                    height: 30,
+                    width: wp('10%'),
+                    height: wp('10%'),
                     justifyContent: 'center',
                     alignItems: 'center',
-                    marginRight: 10,
+                    marginRight: wp('1%'),
                   }}>
                   <TouchableOpacity
                     onPress={() =>
@@ -126,27 +130,27 @@ export default class FeedDetail extends Component {
                         state,
                       )
                     }>
-                    <Icon name="heart" size={16} color="#FDBA7C" />
+                    <Icon name="heart" size={hp('2.8%')} color="#FDBA7C" />
                   </TouchableOpacity>
                 </Neomorph>
               </View>
 
-              <View style={{width: (470 / stWidth) * width}}>
+              <View style={{width: wp('84%')}}>
                 <Text
                   style={{
                     color: '#5F6571',
-                    fontSize: 20,
+                    fontSize: hp('2.7%'),
                     fontWeight: 'bold',
                   }}>
                   {opening}
                 </Text>
               </View>
 
-              <View style={{width: (470 / stWidth) * width, marginTop: 10}}>
+              <View style={{width: wp('84%'), marginTop: hp('1%')}}>
                 <Text
                   style={{
                     color: '#5F6571',
-                    fontSize: 18,
+                    fontSize: hp('2.5%'),
                   }}>
                   {opening2}
                 </Text>
@@ -154,17 +158,17 @@ export default class FeedDetail extends Component {
               <Image
                 source={{uri: image}}
                 style={{
-                  height: (260 / stHeight) * height,
-                  width: (470 / stWidth) * width,
+                  height: hp('27%'),
+                  width: wp('84%'),
                   borderRadius: 10,
                   marginVertical: 15,
                 }}
               />
-              <View style={{width: (470 / stWidth) * width, marginBottom: 10}}>
+              <View style={{width: wp('84%'), marginBottom: hp('1%')}}>
                 <Text
                   style={{
                     color: '#5F6571',
-                    fontSize: 18,
+                    fontSize: hp('2.5%'),
                   }}>
                   {content}
                 </Text>

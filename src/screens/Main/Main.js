@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import {View, Text, Dimensions, StyleSheet} from 'react-native';
 
 import FeedsScreen from './Feeds/Feeds';
 import VideosScreen from './Videos/Videos';
 import LikesScreen from './Likes/Likes';
-import FeedDetailScreen from './Feeds/FeedDetail';
-import VideoDetailScreen from './Videos/VideoDetail';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
@@ -13,7 +10,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Icon1 from 'react-native-vector-icons/Entypo';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {Neomorph, Shadow} from 'react-native-neomorph-shadows';
+import {Neomorph} from 'react-native-neomorph-shadows';
+
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 export default class Main extends Component {
   constructor(props) {
@@ -22,15 +24,11 @@ export default class Main extends Component {
   }
 
   render() {
-    const {height, width} = Dimensions.get('window');
-
-    const stWidth = 540; //Standard Width
-    const stHeight = 936; // Standard Height
     const Tab = createBottomTabNavigator();
     return (
       <Tab.Navigator
         screenOptions={({route}) => ({
-          tabBarIcon: ({focused, size1 = (35 / stHeight) * height, color}) => {
+          tabBarIcon: ({focused, size1 = hp('4%'), color}) => {
             let inner;
             inner = focused ? 'inner' : ''; //TODO: không thực thi code khi được được chọn
             if (route.name === 'Feeds') {
@@ -39,11 +37,11 @@ export default class Main extends Component {
                   {...inner}
                   swapShadows // <- change zIndex of each shadow color
                   style={{
-                    borderRadius: (10 / stHeight) * height,
-                    shadowRadius: (4 / stHeight) * height,
+                    borderRadius: hp('1%'),
+                    shadowRadius: hp('1%'),
                     backgroundColor: '#EBECF0',
-                    width: 50,
-                    height: 50,
+                    width: hp('7%'),
+                    height: hp('7%'),
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
@@ -55,11 +53,11 @@ export default class Main extends Component {
                 <Neomorph
                   swapShadows // <- change zIndex of each shadow color
                   style={{
-                    borderRadius: (10 / stHeight) * height,
-                    shadowRadius: (4 / stHeight) * height,
+                    borderRadius: hp('1%'),
+                    shadowRadius: hp('1%'),
                     backgroundColor: '#EBECF0',
-                    width: 50,
-                    height: 50,
+                    width: hp('7%'),
+                    height: hp('7%'),
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
@@ -71,11 +69,11 @@ export default class Main extends Component {
                 <Neomorph
                   swapShadows // <- change zIndex of each shadow color
                   style={{
-                    borderRadius: (10 / stHeight) * height,
-                    shadowRadius: (4 / stHeight) * height,
+                    borderRadius: hp('1%'),
+                    shadowRadius: hp('1%'),
                     backgroundColor: '#EBECF0',
-                    width: 50,
-                    height: 50,
+                    width: hp('7%'),
+                    height: hp('7%'),
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
@@ -92,7 +90,7 @@ export default class Main extends Component {
             backgroundColor: '#EBECF0',
           },
           style: {
-            height: (100 / stHeight) * height,
+            height: hp('10%'),
             elevation: 0,
             borderTopWidth: 0,
             borderTopColor: 'transparent',

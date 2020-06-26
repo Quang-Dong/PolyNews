@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, Dimensions} from 'react-native';
+import {View} from 'react-native';
 
 import AllFeedScreen from './components/AllFeed';
 import ICTScreen from './components/ICT';
@@ -10,6 +10,11 @@ import HealthScreen from './components/Health';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 export default class Feeds extends Component {
   constructor(props) {
@@ -27,11 +32,11 @@ export default class Feeds extends Component {
             style: {
               backgroundColor: '#EBECF0',
               elevation: 0,
-              height: 40,
+              height: hp('5%'),
             },
             labelStyle: {
               fontWeight: 'bold',
-              width: 75,
+              width: hp('11%'),
             },
             activeTintColor: '#FDBA7C',
             inactiveTintColor: '#BEC1C9',

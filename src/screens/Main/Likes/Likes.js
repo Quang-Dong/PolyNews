@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
-  Dimensions,
   Image,
   FlatList,
   SafeAreaView,
@@ -16,12 +15,16 @@ import {Neomorph} from 'react-native-neomorph-shadows';
 
 import Swipeout from 'react-native-swipeout';
 
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
 export default class Likes extends Component {
   constructor(props) {
     super(props);
     this.state = {
       likes: [],
-      activeRowKey: null,
     };
 
     this.itemRef = firebase.database().ref('likes');
@@ -63,12 +66,6 @@ export default class Likes extends Component {
 
   render() {
     const {navigation} = this.props;
-
-    const {height, width} = Dimensions.get('window');
-
-    const stWidth = 540; //Standard Width
-    const stHeight = 936; // Standard Height
-
     const swipeOutLeft = {
       autoClose: true,
       right: {
@@ -107,14 +104,14 @@ export default class Likes extends Component {
             <Neomorph
               swapShadows // <- change zIndex of each shadow color
               style={{
-                shadowRadius: (4 / stHeight) * height,
-                borderRadius: (15 / stHeight) * height,
+                shadowRadius: hp('0.5%'),
+                borderRadius: hp('1.5%'),
                 backgroundColor: '#EBECF0',
-                width: (500 / stWidth) * width,
-                height: (150 / stHeight) * height,
+                width: wp('95%'),
+                height: hp('16%'),
                 justifyContent: 'center',
                 alignItems: 'center',
-                margin: 10,
+                margin: hp('1%'),
               }}>
               {/* Để ý cái đống ngoặc ở 'right' là {[{}]} chứ không phải {{}} */}
               <Swipeout
@@ -140,7 +137,7 @@ export default class Likes extends Component {
                     },
                   },
                 ]}
-                style={{borderRadius: 15}}>
+                style={{borderRadius: hp('1.5%')}}>
                 <TouchableOpacity
                   onPress={() => {
                     navigation.navigate(
@@ -160,31 +157,31 @@ export default class Likes extends Component {
                   }}
                   style={{
                     flexDirection: 'row',
-                    width: (480 / stWidth) * width,
-                    height: (130 / stHeight) * height,
-                    borderRadius: (15 / stHeight) * height,
+                    width: wp('89%'),
+                    height: hp('13.5%'),
+                    borderRadius: hp('1.5%'),
                     backgroundColor: '#EBECF0',
                     justifyContent: 'space-between',
                   }}>
                   <Image
                     source={{uri: item.image}}
                     style={{
-                      height: (130 / stHeight) * height,
-                      width: (130 / stWidth) * width,
-                      borderRadius: (15 / stHeight) * height,
+                      height: hp('13.5%'),
+                      width: wp('25%'),
+                      borderRadius: hp('1.5%'),
                     }}
                   />
 
                   <View
                     style={{
-                      height: (130 / stHeight) * height,
-                      width: (330 / stWidth) * width,
+                      height: hp('13.5%'),
+                      width: wp('61%'),
                     }}>
                     <Text
                       style={{
                         fontWeight: 'bold',
                         color: '#5F6571',
-                        fontSize: 17,
+                        fontSize: hp('2.4%'),
                       }}>
                       {item.title}
                     </Text>

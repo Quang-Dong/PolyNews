@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Dimensions, StatusBar} from 'react-native';
+import {View, StatusBar} from 'react-native';
 
 import YouTube from 'react-native-youtube';
 
-import {Neomorph, Shadow} from 'react-native-neomorph-shadows';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 export default class VideoDetail extends Component {
   constructor(props) {
@@ -19,11 +22,6 @@ export default class VideoDetail extends Component {
   //TODO: Sửa giao diện nút 'quay lại'.
 
   render() {
-    const {height, width} = Dimensions.get('window');
-
-    const stWidth = 540; //Standard Width
-    const stHeight = 936; // Standard Height
-
     const {route} = this.props;
     const {id, videoID} = route.params;
     return (
@@ -59,8 +57,8 @@ export default class VideoDetail extends Component {
           }
           style={{
             alignSelf: 'stretch',
-            width: width,
-            height: (300 / stHeight) * height,
+            width: wp('100%'),
+            height: hp('50%'),
             backgroundColor: '#EBECF0',
           }}
         />

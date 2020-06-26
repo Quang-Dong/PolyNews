@@ -1,14 +1,18 @@
 import 'react-native-gesture-handler';
 import React, {Component} from 'react';
-import {View, StatusBar, Dimensions, StyleSheet} from 'react-native';
+import {View, StatusBar} from 'react-native';
 
 import FeedDetailScreen from './screens/Main/Feeds/FeedDetail';
 import VideoDetailScreen from './screens/Main/Videos/VideoDetail';
-import LikesScreen from './screens/Main/Likes/Likes';
 import MainScreen from './screens/Main/Main';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 export default class App extends Component {
   constructor(props) {
@@ -38,11 +42,6 @@ export default class App extends Component {
   render() {
     const Stack = createStackNavigator();
 
-    const {height, width} = Dimensions.get('window');
-
-    const stWidth = 540; //Standard Width
-    const stHeight = 936;
-
     return (
       <View style={{flex: 1, backgroundColor: '#EBECF0'}}>
         <StatusBar barStyle="dark-content" backgroundColor="#EBECF0" />
@@ -60,7 +59,7 @@ export default class App extends Component {
                   elevation: 0,
                 },
                 headerTitleStyle: {
-                  fontSize: (25 / stHeight) * height,
+                  fontSize: hp('3%'),
                 },
               })}
             />
@@ -69,13 +68,9 @@ export default class App extends Component {
               component={FeedDetailScreen}
               options={({route}) => ({
                 headerTitle: '',
-                headerTintColor: '#595F6C',
                 headerStyle: {
                   backgroundColor: '#EBECF0',
                   elevation: 0,
-                },
-                headerTitleStyle: {
-                  fontSize: (25 / stHeight) * height,
                 },
               })}
             />
@@ -84,13 +79,9 @@ export default class App extends Component {
               component={VideoDetailScreen}
               options={({route}) => ({
                 headerTitle: '',
-                headerTintColor: '#595F6C',
                 headerStyle: {
                   backgroundColor: 'black',
                   elevation: 0,
-                },
-                headerTitleStyle: {
-                  fontSize: (25 / stHeight) * height,
                 },
               })}
             />

@@ -1,18 +1,16 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  Dimensions,
-  Image,
-  FlatList,
-  SafeAreaView,
-} from 'react-native';
+import {View, Text, Image, FlatList, SafeAreaView} from 'react-native';
 
-import {Neomorph, Shadow} from 'react-native-neomorph-shadows';
+import {Neomorph} from 'react-native-neomorph-shadows';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 import firebase from 'firebase';
+
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 export default class Videos extends Component {
   constructor(props) {
@@ -52,12 +50,6 @@ export default class Videos extends Component {
 
   render() {
     const {navigation} = this.props;
-
-    const {height, width} = Dimensions.get('window');
-
-    const stWidth = 540; //Standard Width
-    const stHeight = 936; // Standard Height
-
     return (
       <SafeAreaView
         style={{
@@ -72,14 +64,14 @@ export default class Videos extends Component {
             <Neomorph
               swapShadows // <- change zIndex of each shadow color
               style={{
-                shadowRadius: (5 / stHeight) * height,
-                borderRadius: (15 / stHeight) * height,
+                shadowRadius: hp('0.5%'),
+                borderRadius: hp('1.5%'),
                 backgroundColor: '#EBECF0',
-                width: (500 / stWidth) * width,
-                height: (150 / stHeight) * height,
+                width: wp('95%'),
+                height: hp('16%'),
                 justifyContent: 'center',
                 alignItems: 'center',
-                margin: 10,
+                margin: hp('1%'),
               }}>
               <TouchableOpacity
                 onPress={() => {
@@ -90,9 +82,9 @@ export default class Videos extends Component {
                 }}
                 style={{
                   flexDirection: 'row',
-                  width: (480 / stWidth) * width,
-                  height: (130 / stHeight) * height,
-                  borderRadius: (15 / stHeight) * height,
+                  width: wp('89%'),
+                  height: hp('13.5%'),
+                  borderRadius: hp('1.5%'),
                   backgroundColor: '#EBECF0',
                   justifyContent: 'space-between',
                   alignItems: 'center',
@@ -100,16 +92,16 @@ export default class Videos extends Component {
                 <Image
                   source={{uri: item.image}}
                   style={{
-                    height: (130 / stHeight) * height,
-                    width: (130 / stWidth) * width,
-                    borderRadius: (15 / stHeight) * height,
+                    height: hp('13.5%'),
+                    width: wp('25%'),
+                    borderRadius: hp('1.5%'),
                   }}
                 />
                 <View
                   style={{
                     flexDirection: 'column',
-                    height: (130 / stHeight) * height,
-                    width: (330 / stWidth) * width,
+                    height: hp('13.5%'),
+                    width: wp('61%'),
                   }}>
                   <View
                     style={{
@@ -119,7 +111,7 @@ export default class Videos extends Component {
                       style={{
                         fontWeight: 'bold',
                         color: '#5F6571',
-                        fontSize: 17,
+                        fontSize: hp('2.4%'),
                       }}>
                       {item.title}
                     </Text>

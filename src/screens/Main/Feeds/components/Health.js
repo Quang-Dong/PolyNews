@@ -6,11 +6,15 @@ import {
   Image,
   FlatList,
   SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
 
-import {Neomorph, Shadow} from 'react-native-neomorph-shadows';
+import {Neomorph} from 'react-native-neomorph-shadows';
 
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 import firebaseConfig from 'firebase';
 
@@ -55,12 +59,6 @@ export default class Health extends Component {
     });
   };
 
-  setDB() {
-    this.itemsRef.set({
-      3: 'Sport',
-    });
-  }
-
   componentDidMount() {
     this.listenForItems(this.itemsRef);
   }
@@ -84,11 +82,11 @@ export default class Health extends Component {
         <Neomorph
           swapShadows // <- change zIndex of each shadow color
           style={{
-            shadowRadius: (4 / stHeight) * height,
-            borderRadius: (15 / stHeight) * height,
+            shadowRadius: hp('0.5%'),
+            borderRadius: hp('1%'),
             backgroundColor: '#EBECF0',
-            width: (510 / stWidth) * width,
-            height: (750 / stHeight) * height,
+            width: wp('93%'),
+            height: hp('80%'),
             justifyContent: 'center',
             alignItems: 'center',
           }}>
@@ -96,20 +94,21 @@ export default class Health extends Component {
             inner
             swapShadows // <- change zIndex of each shadow color
             style={{
-              shadowRadius: (4 / stHeight) * height,
-              borderRadius: (15 / stHeight) * height,
+              shadowRadius: hp('0.5%'),
+              borderRadius: hp('1%'),
               backgroundColor: '#EBECF0',
-              width: (510 / stWidth) * width,
-              height: (750 / stHeight) * height,
+              width: wp('93%'),
+              height: hp('80%'),
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <SafeAreaView style={{backgroundColor: '#EBECF0', margin: 10}}>
+            <SafeAreaView
+              style={{backgroundColor: '#EBECF0', margin: hp('1.5%')}}>
               <FlatList
                 data={this.state.feeds}
                 renderItem={({item}) => (
                   <TouchableOpacity
-                    style={{marginBottom: 30}}
+                    style={{marginBottom: hp('2%')}}
                     onPress={() => {
                       navigation.navigate('FeedDetail', {
                         id: item.id,
@@ -125,10 +124,11 @@ export default class Health extends Component {
                     <Image
                       source={{uri: item.image}}
                       style={{
-                        height: (200 / stHeight) * height,
-                        width: width - (59 / stWidth) * width,
+                        height: hp('22%'),
+                        width: wp('87%'),
                         flex: 4,
-                        borderRadius: 10,
+                        borderRadius: hp('1%'),
+                        alignSelf: 'center',
                       }}
                     />
                     <View style={{flex: 1}}>
@@ -136,7 +136,7 @@ export default class Health extends Component {
                         style={{
                           fontWeight: 'bold',
                           color: '#5F6571',
-                          fontSize: 14,
+                          fontSize: hp('2%'),
                         }}>
                         {item.title}
                       </Text>
